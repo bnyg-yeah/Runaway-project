@@ -1,3 +1,5 @@
+//src/app/api/ping/route.ts
+
 /**
  * First backend of the app
  * App relies on API routs to call multiple external APIs

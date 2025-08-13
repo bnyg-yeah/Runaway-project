@@ -1,3 +1,4 @@
+//src/app/providers.tsx
 /**
  * A global provider so any client component can use useQuery
  * A QueryClient is the brain that stores all fetched data cache, status for each requests, and settings like retry rules
