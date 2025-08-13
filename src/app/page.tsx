@@ -53,7 +53,7 @@ export default function HomePage() {
   return (
     //this is the page's main content
     //Tailwind classes centers horizontally, maximum width, padding
-    <main className="mx-auto max-w-2xl p-6">
+    <main className="mx-auto max-w-2x1 p-6">
       {/* Title for app */}
       <h1 className="text-3x1 font-bold">Runaway</h1>
       {/* subtitle for app 
