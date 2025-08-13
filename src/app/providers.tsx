@@ -10,26 +10,25 @@
 
 import React, { PropsWithChildren, useState } from "react"; //for building components and managing state
 
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query"; //Tanstack Query provides caching, deduping, retries for client side data fetching
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"; //Tanstack Query provides caching, deduping, retries for client side data fetching
 
 /**
  * Providers creates a single QueryClient instance and exposes it to the entire app.
- * @param param0 
+ * @param param0
  */
-export default function Providers( {children}: PropsWithChildren) {
+export default function Providers({ children }: PropsWithChildren) {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  );
 
-    const [queryCLient] = useState (
-        () => 
-            new QueryClient ({
-                defaultOptions: {
-                    queries: {
-                        //avoid refetching on every window focus 
-                        refetchOnWindowFocus: false, 
-                    },
-                },
-            })
-            
-    );
-//Queryclientprovuder makes react query available to descendats
-    return <QueryClientProvider client={queryCLient}> {children} </QueryClientProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
 }

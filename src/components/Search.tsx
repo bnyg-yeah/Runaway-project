@@ -176,7 +176,7 @@ export default function Search({ onSelect }: Props) {
         <div
           id="city-suggestions"
           role="listbox"
-          className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow"
+          className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow text-black" 
         >
           {isLoading && (
             <div className="px-3 py-2 text-sm text-gray-500">Searching…</div>
