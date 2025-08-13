@@ -4,9 +4,10 @@ import PingTest from "../components/PingTest";
 
 export default function Page() {
   return (
+    //background appearance
     <main className="mx-auto max-w-5xl p-6 space-y-8">
       <header>
-        <h1 className="text-3xl font-bold">Runaway</h1>
+        <h1 className="text-3xl font-bold text-black">Runaway</h1>
         <p className="mt-1 text-sm text-gray-600">
           Type a city to explore (e.g., Paris, Blacksburg).
         </p>

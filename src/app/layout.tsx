@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       {/* sets the minum height of body to dynamic for browser UI changes, black
       background, text color is a neutral gray */}
-      <body className={"min-h-dvh bg-black text-neutral-100"}>
+      <body className={"min-h-dvh bg-[#FFFFF0] text-neutral-100"}>
         {/* we wrap the app with Query, as explained in providers.tsx */}
         <Providers>{children}</Providers>
       </body>

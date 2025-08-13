@@ -55,12 +55,12 @@ export default function PingTest() {
     //Tailwind classes centers horizontally, maximum width, padding
     <main className="mx-auto max-w-2xl p-6">
       {/* Title for ping test */}
-      <h1 className="text-3xl font-bold">Ping Test</h1>
+      <h1 className="text-3xl font-bold text-black">Ping Test</h1>
 
       {/* a section to show the ping result with a heading
       with a card-like styling with rounded corners, thing border, and padding */}
       <section className="mt-6 rounded-2xl border border-neutral-800 p-4">
-        <h2 className="text-xl font-semibold">React Query to /api/ping</h2>
+        <h2 className="text-xl font-semibold text-black">React Query to /api/ping</h2>
 
         {/* if isError is true then theres an error, show a red error message
           (error as Error) is Typescript to treat error like a standard Error to access .message */}

@@ -155,7 +155,7 @@ export default function Search({ onSelect }: Props) {
   return (
     <div className="relative max-w-xl w-full">
       {/* The search input */}
-      <label className="block text-sm font-medium mb-1">Search city</label>
+      <label className="block text-sm font-medium mb-1 text-black">Search city</label>
 
       <input
         role="combobox"
@@ -168,7 +168,7 @@ export default function Search({ onSelect }: Props) {
         onFocus={handleFocus}
         onBlur={handleBlur}
         placeholder="Start typing… (e.g., Par, Blac)"
-        className="w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="text-black w-full rounded-xl border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
       {/* Suggestions dropdown */}
