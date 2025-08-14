@@ -3,24 +3,25 @@ Runaway lets you virtually teleport to any city in the world without leaving hom
 
 Installation:
 Clone the repo with
-git clone https://github.com/bnyg-yeah/project.git
+    git clone https://github.com/bnyg-yeah/project.git
 Install dependicies with 
-npm install
-Create .env.local with API keys
-cp .env.example .env.local
-Edit .env.local and add your own Unsplash API key
+    npm install
+Create .env.local with API keys for advanced testing. Normal testing should be ok with no API key with Unsplash API.
+    cp .env.example .env.local
+    Edit .env.local and add your own Unsplash API key
 Run locally with
-npm run dev
+    npm run dev
 
-Features
+Features:
 Autocomplete city search - type part of a name and pick from suggestions
 Current weather and today's forecast 
 Fresh photos - high quality images from Unsplash
 Recent news headlines - top articles from the past 7 days
+History of recent searched cities - using Mongoose you can see your past 10 searches
 Independent cards - each feature loads separately and does not break other cards in case of failure
 Adaptive design - works on mobile, tablet, and desktop
 
-Technology Stack
+Technology Stack:
 Frontend: Next.js with React, TypeScript, and App Router
 Styling: Tailwind CSS
 State/Data fetching: React Query (TanStack)

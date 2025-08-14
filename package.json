@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.84.2",
+    "mongoose": "^8.17.1",
     "next": "15.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0"
@@ -22,6 +23,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
+    "mongodb-memory-server": "^10.2.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

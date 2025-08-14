@@ -15,6 +15,12 @@ import Search, { Place } from "./Search";
 
 import { useRouter, useSearchParams } from "next/navigation"; // for URL sync, explained at const router
 
+//import cards here
+import WeatherCard from "./WeatherCard";
+import NewsCard from "./NewsCard";
+import PhotosCard from "./PhotosCard";
+import HistoryCard from "./HistoryCard";
+
 export default function HomeHub() {
   //which place was selected?
   const [selected, setSelected] = useState<Place | null>(null);
@@ -45,68 +51,33 @@ export default function HomeHub() {
     [router, searchParams]
   );
 
-
   return (
+    // A simple vertical stack is easier/safer than a grid for this layout.
+    // We keep consistent gaps with space-y-6 and let each section own its own width.
     <section className="space-y-6">
-      {/* Search box with suggestions. When a suggestion is chosen, we store it above. */}
+      {/* 1) Search always on top */}
       <Search onSelect={handleSelect} />
 
-      {/* Debug panel so you can *see* what the hub is holding. Remove when ready. */}
-      <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-        <h2 className="text-lg font-semibold text-black">Selection debug</h2>
-        {selected ? (
-          <div className="mt-2 text-sm text-gray-700">
-            <div>
-              <span className="font-medium">Place:</span> {selected.city}
-              {selected.region ? `, ${selected.region}` : ""},{" "}
-              {selected.country}
-            </div>
-            <div>
-              <span className="font-medium">Coords:</span>{" "}
-              {selected.latitude.toFixed(4)}, {selected.longitude.toFixed(4)}
-            </div>
-            <div>
-              <span className="font-medium">Timezone:</span> {selected.timezone}
-            </div>
-          </div>
-        ) : (
-          <p className="mt-2 text-sm text-gray-500">
-            No city selected yet. Choose one above.
-          </p>
-        )}
+      {/* 2) Weather: full-width, thin banner */}
+      {/* We don't constrain width here — let it stretch across the screen */}
+      <div>
+        <WeatherCard place={selected} variant="banner" />
       </div>
 
-      {/* Layout slots for current + upcoming MVP cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {/* Weather card (we'll implement next) */}
-        <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-          <h3 className="font-semibold text-black">Weather</h3>
-          <p className="text-sm text-gray-500">
-            {selected
-              ? "Next: call /api/weather with the selected lat/lon/tz."
-              : "Select a city to load weather."}
-          </p>
-        </div>
+      {/* 3) Photos: centered and large */}
+      {/* Wrap in a wide max-width container and center with mx-auto. 
+          Use responsive max-w-* so it feels big but doesn't overflow ultra-wide monitors. */}
+      <div className="mx-auto w-full max-w-6xl px-0 sm:px-2">
+        <PhotosCard place={selected} />
+      </div>
 
-        {/* Photos card placeholder */}
-        <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-          <h3 className="font-semibold text-black">Photos</h3>
-          <p className="text-sm text-gray-500">
-            {selected
-              ? 'Next: call /api/photos?query="<City, Country>" (Unsplash).'
-              : "Select a city to load photos."}
-          </p>
-        </div>
-
-        {/* News card placeholder */}
-        <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-          <h3 className="font-semibold text-black">News</h3>
-          <p className="text-sm text-gray-500">
-            {selected
-              ? 'Next: call /api/news?q="<City, Country>" (Google News RSS).'
-              : "Select a city to load news."}
-          </p>
-        </div>
+      {/* 4) News: full-width below photos */}
+      <div>
+        <NewsCard place={selected} />
+      </div>
+      
+      <div>
+        <HistoryCard place={selected} />
       </div>
     </section>
   );

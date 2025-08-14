@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  "Teleport Pin" — SVG favicon/logo
+  Theme: teleportation portal (energy rings) + map pin (destination).
+  Notes:
+  - Stays simple and bold for clarity at very small sizes.
+  - Uses gradients and a soft glow filter for a subtle "energy" vibe.
+  - Safe to drop directly into <link rel="icon" type="image/svg+xml" href="/teleport-pin.svg" />
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="512" height="512" role="img" aria-labelledby="title desc">
+  <title id="title">Teleport Pin</title>
+  <desc id="desc">A simple map pin hovering over glowing portal rings to suggest instant travel.</desc>
+
+  <!--
+    Definitions: gradients + glow filter.
+    We keep the palette in the cyan/purple/magenta range, which reads as "sci‑fi / teleport" to most users.
+  -->
+  <defs>
+    <!-- Portal gradient: cyan -> purple -->
+    <linearGradient id="portalStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="100%" stop-color="#7C4DFF" />
+    </linearGradient>
+
+    <!-- Pin gradient: purple -> magenta -->
+    <linearGradient id="pinFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8E7CFF"/>
+      <stop offset="100%" stop-color="#E91E63"/>
+    </linearGradient>
+
+    <!-- Soft glow for the portal ring -->
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background is transparent so it works on light/dark tabs -->
+  <!-- Portal: two offset rings (thick strokes) with gradient and a slight glow -->
+  <g filter="url(#softGlow)" opacity="0.95">
+    <!-- Main ring -->
+    <ellipse cx="32" cy="46" rx="16" ry="5.5"
+             fill="none" stroke="url(#portalStroke)" stroke-width="3.2" stroke-linecap="round"/>
+    <!-- Secondary ring for depth -->
+    <ellipse cx="30.5" cy="44.75" rx="12.5" ry="4"
+             fill="none" stroke="url(#portalStroke)" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  </g>
+
+  <!-- Map pin: classic teardrop with a white inner dot for readability at tiny sizes -->
+  <!-- Outer subtle outline improves contrast on both dark and light tab backgrounds -->
+  <g transform="translate(0,0)">
+    <!-- Pin shadow (very subtle) -->
+    <path d="M32 16
+             C25 16,20 21,20 27
+             C20 34,32 48,32 48
+             C32 48,44 34,44 27
+             C44 21,39 16,32 16 Z"
+          fill="rgba(0,0,0,0.15)"/>
+    <!-- Pin body -->
+    <path d="M32 15
+             C24.5 15,19 20.5,19 27
+             C19 34.5,32 50,32 50
+             C32 50,45 34.5,45 27
+             C45 20.5,39.5 15,32 15 Z"
+          fill="url(#pinFill)" stroke="white" stroke-opacity="0.85" stroke-width="0.6"/>
+
+    <!-- Inner white dot -->
+    <circle cx="32" cy="27" r="3.8" fill="white" />
+  </g>
+
+  <!-- Optional sparkles for the teleport vibe (kept chunky so they survive favicons) -->
+  <g opacity="0.85">
+    <circle cx="18.5" cy="39.5" r="0.6" fill="#00E5FF" />
+    <circle cx="46.5" cy="40.5" r="0.6" fill="#7C4DFF" />
+    <rect x="23.5" y="42.5" width="0.8" height="0.8" rx="0.15" fill="#00E5FF" />
+    <rect x="39.8" y="42.0" width="0.8" height="0.8" rx="0.15" fill="#E91E63" />
+  </g>
+</svg>

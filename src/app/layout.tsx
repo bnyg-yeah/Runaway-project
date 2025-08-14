@@ -7,6 +7,9 @@ import Providers from "./providers";
 export const metadata: Metadata = {
   title: "Runaway",
   description: "Lets fly to Euro make this the best summer ever",
+  icons: {
+    icon: "/teleport-pin.svg", // Path from /public
+  },
 };
 
 export default function RootLayout({
