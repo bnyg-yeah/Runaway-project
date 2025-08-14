@@ -15,25 +15,18 @@ Run locally with
 Features:
 Autocomplete city search - type part of a name and pick from suggestions 
 [Autocomplete](assets/Autocomplete.png)
-
 Geocoding - allows passing the city's latitude and longitude to all features
 [Geocoding](assets/Geocoding.png)
-
 Current weather and today's forecast - adaptive data allows automatic display of Farenheit or Celsius depending on that region as well as option to view 24 hour forecast or 12 hour history and 12 hour forecast
 [Weather](assets/Weather.png)
-
 Fresh photos - 12 high quality recently taken images from Unsplash
 [Photos](assets/Photos.png)
-
 Recent news headlines - top articles from the past 7 days
 [News](assets/News.png)
-
 History of recent searched cities - using Mongoose you can see your past 10 searches
 [History](assets/History.png)
-
 Independent cards - each feature loads separately and does not break other cards in case of failure
 [Indpendent](assets/Independent.png)
-
 Adaptive design - works on mobile, tablet, and desktop
 [Adaptive](assets/Adaptive.png)
 
