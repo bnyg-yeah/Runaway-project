@@ -1,74 +1,96 @@
-Runaway
-Runaway lets you virtually teleport to any city in the world without leaving home. In this MVP, pick a city and get live weather, fresh photos, and recent news headlines. It's a single page real time "window" into the city's vibe, designed for homesick users, curious explorers, and trip planners.
+# Runaway
 
+Runaway lets you virtually teleport to any city in the world without leaving home. In this MVP, pick a city and get **live weather**, **fresh photos**, and **recent news headlines**. It’s a single-page real-time “window” into the city’s vibe—designed for homesick users, curious explorers, and trip planners.
 
-Installation:
+> **Demo video:** [`assets/Demo.mp4`](assets/Demo.mp4)
 
-Clone the repo with
-    git clone https://github.com/bnyg-yeah/project.git
+---
 
-Install dependicies with 
-    npm install
+## ✨ Features
 
-Create .env.local with API keys for advanced testing. Normal testing should be ok with no API key with Unsplash API. Edit .env.local and add your own Unsplash API key
-    cp .env.example .env.local
+- **Autocomplete city search** — type part of a name and pick from suggestions  
+  ![Autocomplete](assets/Autocomplete.png)
 
-Run locally with
-    npm run dev
+- **Geocoding** — pass the city’s latitude/longitude/timezone to all features  
+  ![Geocoding](assets/Geocoding.png)
 
+- **Current weather & today’s forecast** — automatic °F/°C based on locale + toggle between **24h forecast** or **12h history + 12h forecast**  
+  ![Weather](assets/Weather.png)
 
-Features:
+- **Fresh photos** — 12 high-quality recent images from Unsplash  
+  ![Photos](assets/Photos.png)
 
-Autocomplete city search - type part of a name and pick from suggestions 
-[Autocomplete](assets/Autocomplete.png)
+- **Recent news headlines** — top articles from the past 7 days  
+  ![News](assets/News.png)
 
-Geocoding - allows passing the city's latitude and longitude to all features
-[Geocoding](assets/Geocoding.png)
+- **History of searched cities** — using Mongoose, view your past 10 searches  
+  ![History](assets/History.png)
 
-Current weather and today's forecast - adaptive data allows automatic display of Farenheit or Celsius depending on that region as well as option to view 24 hour forecast or 12 hour history and 12 hour forecast
-[Weather](assets/Weather.png)
+- **Independent cards** — each feature loads separately and won’t break others on failure  
+  ![Independent](assets/Independent.png)
 
-Fresh photos - 12 high quality recently taken images from Unsplash
-[Photos](assets/Photos.png)
+- **Adaptive design** — works on mobile, tablet, and desktop  
+  ![Adaptive](assets/Adaptive.png)
 
-Recent news headlines - top articles from the past 7 days
-[News](assets/News.png)
+---
 
-History of recent searched cities - using Mongoose you can see your past 10 searches
-[History](assets/History.png)
+## 🚀 Installation
 
-Independent cards - each feature loads separately and does not break other cards in case of failure
-[Indpendent](assets/Independent.png)
+Clone the repo:
+```bash
+git clone https://github.com/bnyg-yeah/project.git
+cd project
+```
 
-Adaptive design - works on mobile, tablet, and desktop
-[Adaptive](assets/Adaptive.png)
+Install dependencies:
+```bash
+npm install
+```
 
+Create your local env file (optional for Unsplash key; the app still runs without it):
+```bash
+cp .env.example .env.local
+```
 
-Known Issue:
+> For advanced testing, add your Unsplash key to `.env.local` as:
+```ini
+UNSPLASH_ACCESS_KEY=your_key_here
+```
 
-The search bar will show "No places found" after you select a city. Although its true, it is not great UI. I am also limited by the APIs since I am only using free APIs, for example since I am only using one source for the photos, photos may not be as recent as I would like.
+Run locally:
+```bash
+npm run dev
+```
 
-Technology Stack:
-Frontend: Next.js with React, TypeScript, and App Router
-Styling: Tailwind CSS
-State/Data fetching: React Query (TanStack)
-Backend and API routes: Next.js server functions
-Geocoding and Weather: Open Meteo (https://open-meteo.com/) 
-Photos: Unsplash API (https://unsplash.com/developers)
-News: Google News RSS (https://news.google.com/)
-History: Mongoose
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
+---
 
-API Documentation:
+## 🧩 Technology Stack
 
-GET /api/geocode
+- **Frontend:** Next.js (App Router) + React + TypeScript  
+- **Styling:** Tailwind CSS  
+- **State/Data fetching:** React Query (TanStack)  
+- **Backend & API routes:** Next.js server functions  
+- **Geocoding & Weather:** Open-Meteo — https://open-meteo.com/  
+- **Photos:** Unsplash API — https://unsplash.com/developers  
+- **News:** Google News RSS — https://news.google.com/  
+- **History:** Mongoose (last 10 searches)
 
-Convert a city name to coordinates and metadata (via Open-Meteo geocoding).
+---
 
-Query:
-q (required), count (1–10, default 5), countryCode (optional ISO code)
-Response: Place[]
+## 📡 API Documentation
 
+### `GET /api/geocode`
+Converts a city name to coordinates and metadata (via Open-Meteo geocoding).
+
+**Query**
+- `q` *(string, required)*  
+- `count` *(number, 1–10, default 5)*  
+- `countryCode` *(string, optional ISO code)*
+
+**Response**
+```ts
 type Place = {
   city: string;
   region?: string | null;
@@ -77,14 +99,20 @@ type Place = {
   longitude: number;
   timezone: string;
 };
+```
 
-POST /api/history
+---
 
-Add a city to the search history.
+### `POST /api/history`
+Adds a city to the search history.
 
-Body: { city: string, region?: string|null, country: string }
-Response: ItemDTO
+**Body**
+```ts
+{ city: string; region?: string | null; country: string }
+```
 
+**Response**
+```ts
 type ItemDTO = {
   id: string;
   city: string;
@@ -92,22 +120,32 @@ type ItemDTO = {
   country: string;
   viewedAt: Date;
 };
+```
 
-GET /api/history
+---
 
-Return last 10 history items (newest first).
+### `GET /api/history`
+Returns last 10 history items (newest first).
 
-Response: { items: ItemDTO[] }
+**Response**
+```ts
+{ items: ItemDTO[] }
+```
 
-GET /api/news
+---
 
-Fetch recent headlines from Google News RSS.
+### `GET /api/news`
+Fetches recent headlines from Google News RSS.
 
-Query:
-q (required), hl (default "en-US"), gl (default "US"), n (1–20, default 12), og ("1" to fetch og:image)
+**Query**
+- `q` *(string, required)*  
+- `hl` *(string, default "en-US")*  
+- `gl` *(string, default "US")*  
+- `n` *(number, 1–20, default 12)*  
+- `og` *(string, "1" to fetch og:image)*
 
-Response: { items: NewsItem[] }
-
+**Response**
+```ts
 type NewsItem = {
   title: string;
   link: string;
@@ -115,16 +153,19 @@ type NewsItem = {
   publishedAtISO: string;
   imageUrl: string;
 };
+```
 
-GET /api/photos
+---
 
-Search Unsplash for city images.
+### `GET /api/photos`
+Searches Unsplash for city images.
 
-Query:
-q (required), n (1–24, default 12)
+**Query**
+- `q` *(string, required)*  
+- `n` *(number, 1–24, default 12)*
 
-Response: { items: Photo[], mode: "key" | "anonymous" }
-
+**Response**
+```ts
 type Photo = {
   title: string;
   link: string;
@@ -134,14 +175,34 @@ type Photo = {
   publishedAtISO: string;
 };
 
+type PhotosResponse = {
+  items: Photo[];
+  mode: "key" | "anonymous"; // whether Unsplash key was used
+};
+```
 
-Demo Video:
-[Demo](assets/Demo.mp4)
+---
 
+## ⚠️ Known Issue
+- The search bar shows **“No places found”** after selecting a city. It’s technically correct, but not ideal UX.  
+- Free API tiers (e.g., Unsplash without key) may yield fewer or older photos.
 
-Future Development:
-In the future I hope to expand upon this app more with APIs and immersive design. I think of all the experiences people have when being in a place, which is why I plan to incorporate a sound element next. What better way is there than to play the city's local radio station? I also hope to offer a truly live experience in supported cities with a live webcam.
+---
 
+## 🧭 Roadmap (Future Development)
+- **Sound element:** stream local radio stations to enhance immersion  
+- **Live video:** embed city webcams for real-time visuals
 
-Contact:
-You may contact me at bnyg@vt.edu.
+---
+
+## 🛠 Project Scripts (Quick Reference)
+```bash
+npm run dev     # start dev server
+npm run build   # production build
+npm start       # run production build locally
+```
+
+---
+
+## 📬 Contact
+You may contact me at **bnyg@vt.edu**.
