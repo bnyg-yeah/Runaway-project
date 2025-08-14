@@ -10,9 +10,8 @@ Clone the repo with
 Install dependicies with 
     npm install
 
-Create .env.local with API keys for advanced testing. Normal testing should be ok with no API key with Unsplash API.
+Create .env.local with API keys for advanced testing. Normal testing should be ok with no API key with Unsplash API. Edit .env.local and add your own Unsplash API key
     cp .env.example .env.local
-    Edit .env.local and add your own Unsplash API key
 
 Run locally with
     npm run dev
