@@ -44,6 +44,10 @@ Adaptive design - works on mobile, tablet, and desktop
 [Adaptive](assets/Adaptive.png)
 
 
+Known Issue:
+
+The search bar will show "No places found" after you select a city. Although its true, it is not great UI. I am also limited by the APIs since I am only using free APIs, for example since I am only using one source for the photos, photos may not be as recent as I would like.
+
 Technology Stack:
 Frontend: Next.js with React, TypeScript, and App Router
 Styling: Tailwind CSS
@@ -53,6 +57,82 @@ Geocoding and Weather: Open Meteo (https://open-meteo.com/)
 Photos: Unsplash API (https://unsplash.com/developers)
 News: Google News RSS (https://news.google.com/)
 History: Mongoose
+
+
+API Documentation:
+
+GET /api/geocode
+
+Convert a city name to coordinates and metadata (via Open-Meteo geocoding).
+
+Query:
+q (required), count (1–10, default 5), countryCode (optional ISO code)
+Response: Place[]
+
+type Place = {
+  city: string;
+  region?: string | null;
+  country: string;
+  latitude: number;
+  longitude: number;
+  timezone: string;
+};
+
+POST /api/history
+
+Add a city to the search history.
+
+Body: { city: string, region?: string|null, country: string }
+Response: ItemDTO
+
+type ItemDTO = {
+  id: string;
+  city: string;
+  region: string | null;
+  country: string;
+  viewedAt: Date;
+};
+
+GET /api/history
+
+Return last 10 history items (newest first).
+
+Response: { items: ItemDTO[] }
+
+GET /api/news
+
+Fetch recent headlines from Google News RSS.
+
+Query:
+q (required), hl (default "en-US"), gl (default "US"), n (1–20, default 12), og ("1" to fetch og:image)
+
+Response: { items: NewsItem[] }
+
+type NewsItem = {
+  title: string;
+  link: string;
+  source: string;
+  publishedAtISO: string;
+  imageUrl: string;
+};
+
+GET /api/photos
+
+Search Unsplash for city images.
+
+Query:
+q (required), n (1–24, default 12)
+
+Response: { items: Photo[], mode: "key" | "anonymous" }
+
+type Photo = {
+  title: string;
+  link: string;
+  author: string;
+  thumb: string;
+  full: string;
+  publishedAtISO: string;
+};
 
 
 Demo Video:
