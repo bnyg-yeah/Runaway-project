@@ -38,8 +38,8 @@ Runaway lets you virtually teleport to any city in the world without leaving hom
 
 Clone the repo:
 ```bash
-git clone https://github.com/bnyg-yeah/project.git
-cd project
+git clone https://github.com/bnyg-yeah/Runaway-project.git
+cd Runaway-project
 ```
 
 Install dependencies:
